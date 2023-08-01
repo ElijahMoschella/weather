@@ -1,1 +1,1 @@
-
+used user input to generate a respons from api key to weather info in desired location, created funstions to search,find timezzones, search  for the api search history, basic css and html otherwise, js was the focus of this module
