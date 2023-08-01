@@ -1,16 +1,15 @@
-// Global variables
-var searchHistory = [];
-var weatherApiRootUrl = 'https://api.openweathermap.org';
-var weatherApiKey = 'f1a02a061c82541d80687bb2d66ca71f';
-
-// DOM element references
 var searchForm = document.querySelector('#search-form');
 var searchInput = document.querySelector('#search-input');
 var todayContainer = document.querySelector('#today');
 var forecastContainer = document.querySelector('#forecast');
 var searchHistoryContainer = document.querySelector('#history');
 
-// Add timezone plugins to day.js
+
+var searchHistory = [];
+var weatherApiRootUrl = 'https://api.openweathermap.org';
+var weatherApiKey = 'f1a02a061c82541d80687bb2d66ca71f';
+
+
 dayjs.extend(window.dayjs_plugin_utc);
 dayjs.extend(window.dayjs_plugin_timezone);
 
@@ -18,7 +17,7 @@ dayjs.extend(window.dayjs_plugin_timezone);
 function renderSearchHistory() {
   searchHistoryContainer.innerHTML = '';
 
-  // Start at end of history array and count down to show the most recent at the top.
+  
   for (var i = searchHistory.length - 1; i >= 0; i--) {
     var btn = document.createElement('button');
     btn.setAttribute('type', 'button');
@@ -32,7 +31,7 @@ function renderSearchHistory() {
   }
 }
 
-// Function to update history in local storage then updates displayed history.
+
 function appendToHistory(search) {
   // If there is no search term return the function
   if (searchHistory.indexOf(search) !== -1) {
@@ -97,14 +96,9 @@ function renderCurrentWeather(city, weather) {
 // Function to display a forecast card given an object from open weather api
 // daily forecast.
 function renderForecastCard(forecast) {
-  // variables for data from api
-  var iconUrl = `https://openweathermap.org/img/w/${forecast.weather[0].icon}.png`;
-  var iconDescription = forecast.weather[0].description;
-  var tempF = forecast.main.temp;
-  var humidity = forecast.main.humidity;
-  var windMph = forecast.wind.speed;
+ 
 
-  // Create elements for a card
+
   var col = document.createElement('div');
   var card = document.createElement('div');
   var cardBody = document.createElement('div');
@@ -113,7 +107,13 @@ function renderForecastCard(forecast) {
   var tempEl = document.createElement('p');
   var windEl = document.createElement('p');
   var humidityEl = document.createElement('p');
-
+ 
+  var iconUrl = `https://openweathermap.org/img/w/${forecast.weather[0].icon}.png`;
+  var iconDescription = forecast.weather[0].description;
+  var tempF = forecast.main.temp;
+  var humidity = forecast.main.humidity;
+  var windMph = forecast.wind.speed;
+  
   col.append(card);
   card.append(cardBody);
   cardBody.append(cardTitle, weatherIcon, tempEl, windEl, humidityEl);
@@ -172,8 +172,7 @@ function renderItems(city, data) {
   renderForecast(data.list);
 }
 
-// Fetches weather data for given location from the Weather Geolocation
-// endpoint; then, calls functions to display current and forecast weather data.
+
 function fetchWeather(location) {
   var { lat } = location;
   var { lon } = location;
